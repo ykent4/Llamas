@@ -12,8 +12,48 @@
 function ListNode(val) {
   this.val = val;
   this.next = null;
-}
+};
 
 var removeNthFromEnd = function(head, n) {
+  var currentNode;
+  var prevNode;
+  var count = 0;
+  var total = 0;
     
+    
+  currentNode = head;
+  while(currentNode) {
+    total++;
+    currentNode = currentNode.next;
+  }
+    
+  if( total === 1 && n === 1) {
+     head = [];
+     return head;
+  }
+
+  if (total === n) {
+      head = head.next;
+  }
+    
+  currentNode = head;
+
+  while (count <= total-n) {
+      
+        count++;
+        if(count === total-n) {
+          prevNode = currentNode;
+          if(currentNode.next){
+             currentNode = currentNode.next;
+             prevNode.next = currentNode.next;    
+          } else {
+              prevNode.next = null;
+          }
+          break; 
+        }
+        
+    currentNode = currentNode.next
+  }
+
+  return head;
 };
