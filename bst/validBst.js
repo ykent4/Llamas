@@ -1,12 +1,12 @@
 function isValidBSTHelper(root, min, max) {
   min = min || null;
   max = max || null;
-  
+
   if (root === null) {
     return true;
   }
 
-  if ((min !== null && root.val <= min) || max !== null && root.val >= max)) {
+  if ((min !== null && root.val <= min) || max !== null && root.val >= max) {
     return false;
   }
 
