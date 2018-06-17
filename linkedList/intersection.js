@@ -38,9 +38,11 @@ function intersection(l1, l2) {
     l2Pointer = l2Pointer.next;
   }
 
+  //if pointers don't 
   if (l1Pointer !== l2Pointer) {
     return undefined;
   }
+  
   //if they have the same tail, have two pointers go down each linked list
   //if one ll is longer, go down until it hits the same (total(l1) - count) = total(l2)
   //traverse linked list until you hit an equal node
