@@ -1,14 +1,17 @@
-function isValidBSTHelper(root, min, max) {
-  min = min || null;
-  max = max || null;
+var isValidBST = function(root, min, max) {
 
-  if (root === null) {
-    return true;
+  if(root === null) {
+      return true;
   }
-
-  if ((min !== null && root.val <= min) || max !== null && root.val >= max) {
-    return false;
+     
+  if(root !== null) {
+      
+      if((min !== undefined && root.val <= min) || (max !== undefined && root.val >= max)) {
+          return false;
+      }
+      
+      return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
   }
+  
+};
 
-  return isValidBSTHelper(root.left, min, root.val) && isValidBSTHelper(root.right, root.val, max);
-}
