@@ -32,7 +32,7 @@ function removeInvalidParens (string) {
       innerHelper(inputString.substring(1), currentString, leftCount);
 
     } else {
-      innerHelper(inputString.substring(1), currentString, leftCount);
+      innerHelper(inputString.substring(1), currentString + char, leftCount);
     }
     
   }

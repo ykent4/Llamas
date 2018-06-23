@@ -14,4 +14,3 @@ var isValidBST = function(root, min, max) {
   }
   
 };
-

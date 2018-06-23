@@ -21,12 +21,19 @@
  */
 
 //using recursion
-var nthFibonacci = function (n) {
+var nthFibonacci = function (n, memo) {
+
+  memo = memo || {};
+
+  if(memo[num]) {
+    return memo[num]
+  } 
+  
   if(n < 2) {
     return 1
   }
 
-  return nthFibonacci(n-2) + nthFibonacci(n-1);
+  return memo[num] = nthFibonacci(n-2) + nthFibonacci(n-1);
 
 };
 
