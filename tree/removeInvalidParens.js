@@ -1,46 +1,52 @@
 //Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
 
-function removeInvalidParens (string) {
-
+function removeInvalidParentheses(s) {
   var result = [];
-  var maxLength = 0;
 
-  //recurse through the function
-  function innerHelper(inputString, currentString, leftCount) {
+  var max = 0; // max is to make sure we're removing the minimum number of parentheses
 
-    //base case
-    if (inputString.length === 0) {
-      if(currentString.length > maxLength) {
-        maxLength = currentString.length;
+  function dfs(result, str, curStr, leftCount, leftAccumulated) {
+    if (str.length === 0) {
+      if (curStr.length > 0 && leftCount === 0) {
+        if (max < leftAccumulated) {
+          max = leftAccumulated;
+        }
+
+        if (max === leftAccumulated && result.indexOf(curStr) === -1) {
+          result.push(curStr);
+        }
       }
 
-      if(currentString.length === maxLength && !result.includes(currentString)) {
-        result.push(currentString);
-      }
       return;
     }
 
-    var char = inputString[0];
+    var char = str.charAt(0);
 
-    if(char === '(') {
-      innerHelper(inputString.substring(1), currentString+'(', leftCount+1);
-
-    } else if(char === ')') {
-      if(leftCount > 0) {
-        innerHelper(inputString.substring(1), currentString+')', leftCount-1); 
+    if (char === '(') {
+      // keep (
+      dfs(result, str.substr(1), curStr + '(', leftCount + 1, leftAccumulated + 1);
+      // not keep (
+      dfs(result, str.substr(1), curStr, leftCount, leftAccumulated);
+    } else if (char === ')') {
+      if (leftCount > 0) {
+        dfs(result, str.substr(1), curStr + ')', leftCount - 1, leftAccumulated);
       }
-      innerHelper(inputString.substring(1), currentString, leftCount);
 
+      dfs(result, str.substr(1), curStr, leftCount, leftAccumulated);
     } else {
-      innerHelper(inputString.substring(1), currentString + char, leftCount);
+      dfs(result, str.substr(1), curStr + char, leftCount, leftAccumulated);
     }
-    
+
   }
 
-  innerHelper(string, '', 0);
+  dfs(result, s, '', 0, 0);
+
+  if (result.length === 0) {
+    result.push('');
+  }
+
 
   return result;
-
 }
 
 

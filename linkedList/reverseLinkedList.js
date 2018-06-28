@@ -15,7 +15,6 @@ function reverseLinkedList (head) {
   return head;
 }
 
-nextNode = currNode.next;
-currNode.next = prevNode;
-prevNode = currNode;
-currNode = nextNode;
+
+
+
